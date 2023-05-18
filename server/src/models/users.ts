@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+import { IUserSchemaCreation } from "../schemas/users";
 
 const { Schema } = mongoose;
 
-const usersSchema = new Schema(
+const usersSchema = new Schema<IUserSchemaCreation>(
   {
     name: {
       type: String,
@@ -28,5 +29,5 @@ const usersSchema = new Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model("Users", usersSchema);
+const User = mongoose.model<IUserSchemaCreation>("Users", usersSchema);
 export { User };

@@ -1,11 +1,17 @@
 import { Request, Response } from "express";
-import { User } from "../models/users";
+import { IUserSchemaCreation } from "../schemas/users";
+import { createUserService, listUserService } from "../services/users";
 
 async function createUserController(req: Request, res: Response) {
-  const userData = req.body;
-  const user = await User.create(userData);
-
-  return res.status(201).json(user);
+  const payload: IUserSchemaCreation = req.body;
+  const data = await createUserService(payload);
+  return res.status(201).json(data);
 }
 
-export { createUserController };
+async function listUserController(req: Request, res: Response) {
+  const id = res.locals.id;
+  const data = await listUserService(id);
+  return res.status(200).json(data);
+}
+
+export { createUserController, listUserController };

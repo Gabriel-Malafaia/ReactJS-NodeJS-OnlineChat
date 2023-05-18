@@ -1,8 +1,22 @@
 import { Router } from "express";
-import { createUserController } from "../../controllers/users";
+import { validateSchema } from "../../middlewares/global/validateSchema";
+import { userSchemaCreation } from "../../schemas/users";
+import { userExistsMiddleware } from "../../middlewares/users/userExists";
+import { userIsAuthenticatedMiddleware } from "../../middlewares/users/userIsAuthenticated.middleware";
+import {
+  createUserController,
+  listUserController,
+} from "../../controllers/users";
 
-const userRoutes = Router();
+const usersRoutes = Router();
 
-userRoutes.post("", createUserController);
+usersRoutes.post(
+  "",
+  validateSchema(userSchemaCreation),
+  userExistsMiddleware,
+  createUserController
+);
 
-export { userRoutes };
+usersRoutes.get("", userIsAuthenticatedMiddleware, listUserController);
+
+export { usersRoutes };
