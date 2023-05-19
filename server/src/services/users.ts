@@ -1,9 +1,5 @@
 import { User } from "../models/users";
-import {
-  IUserSchemaCreation,
-  userSchemaCreation,
-  userSchemaResponse,
-} from "../schemas/users";
+import { IUserSchemaCreation, userSchemaResponse } from "../schemas/users";
 
 async function createUserService(payload: IUserSchemaCreation) {
   const user = await User.create(payload);

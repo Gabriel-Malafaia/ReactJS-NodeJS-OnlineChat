@@ -18,7 +18,7 @@ const userExistsMiddleware = async (
     throw new AppError("User with that email is already registered.", 409);
   }
 
-  if (!user && path == "/sessions") {
+  if (!user && path == "/login") {
     throw new AppError("Email or password is invalid.", 401);
   }
 
