@@ -1,4 +1,4 @@
-import SignInSide from "../../components/LoginForm";
+import { Outlet } from "react-router-dom";
 import { LogoApp } from "../../components/Logo";
 import { GlobalContainer } from "../../styles/components/GlobalContainer";
 import { CenteredContainer, LeftContainer, RightContainer } from "./style";
@@ -11,7 +11,7 @@ const LoginPage = () => {
           <LogoApp />
         </LeftContainer>
         <RightContainer className="Right-Container">
-          <SignInSide />
+          <Outlet />
         </RightContainer>
       </CenteredContainer>
     </GlobalContainer>

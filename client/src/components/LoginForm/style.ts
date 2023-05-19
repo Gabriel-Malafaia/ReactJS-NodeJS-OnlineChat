@@ -6,18 +6,8 @@ const BoxContainer = styled(Box)`
   justify-content: center;
   align-items: center;
   width: 100%;
-
-  span {
-    color: #1565c0 !important;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  a:visited {
-    color: inherit;
-  }
+  animation: fadeIn;
+  animation-duration: 1.5s;
 
   @media (max-width: 768px) {
     padding: none;

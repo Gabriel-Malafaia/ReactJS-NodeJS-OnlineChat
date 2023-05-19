@@ -1,15 +1,15 @@
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { BoxContainer } from "./style";
 import { Link } from "react-router-dom";
 import { Copyright } from "../Copyright";
+import { Box } from "@mui/material";
 
-export default function SignInSide() {
+const SignInSide = () => {
   return (
     <BoxContainer>
       <Avatar sx={{ m: 1, bgcolor: "#E7E7E7" }}>
@@ -61,3 +61,5 @@ export default function SignInSide() {
     </BoxContainer>
   );
 }
+
+export default SignInSide

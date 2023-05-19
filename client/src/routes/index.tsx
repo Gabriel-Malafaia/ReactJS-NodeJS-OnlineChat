@@ -1,13 +1,15 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import { RegisterPage } from "../pages/register";
+import { Route, Routes } from "react-router-dom";
+import { SignUpSide } from "../pages/register";
 import { LoginPage } from "../pages/login";
+import SignInSide from "../components/LoginForm";
 
 const RoutesApp = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/" element={<LoginPage />}>
+        <Route path="/" element={<SignInSide />} />
+        <Route path="/register" element={<SignUpSide />} />
+      </Route>
     </Routes>
   );
 };
