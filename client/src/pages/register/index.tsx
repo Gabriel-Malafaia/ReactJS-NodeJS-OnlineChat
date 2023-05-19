@@ -10,17 +10,15 @@ import { Copyright } from "../../components/Copyright";
 import { useForm } from "react-hook-form";
 import { IRegisterSchema, registerSchema } from "../../schemas/forms";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSignContext } from "../../contexts/SignContext";
 
 const SignUpSide = () => {
+  const { createUserRequest } = useSignContext();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IRegisterSchema>({ resolver: zodResolver(registerSchema) });
-
-  function onSubmitFunc(data: IRegisterSchema) {
-    console.log(data);
-  }
 
   return (
     <RegisterForm>
@@ -31,7 +29,7 @@ const SignUpSide = () => {
         Cadastre sua Conta no ChatApp
       </Typography>
       <Box
-        onSubmit={handleSubmit(onSubmitFunc)}
+        onSubmit={handleSubmit(createUserRequest)}
         component="form"
         noValidate
         sx={{ mt: 1, width: "100%" }}
@@ -68,6 +66,7 @@ const SignUpSide = () => {
 
         <TextField
           {...register("cpf")}
+          type="number"
           margin="normal"
           fullWidth
           label="CPF *"

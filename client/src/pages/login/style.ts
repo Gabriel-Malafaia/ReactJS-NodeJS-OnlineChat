@@ -52,27 +52,28 @@ const CenteredContainer = styled("section")`
 `;
 
 const LeftContainer = styled("section")`
-  border-radius: 6px 0 0 6px;
-  background-color: #2670bf;
+  border-radius: 8px 0 0 8px;
+  background-color: #1565c0;
   width: 100%;
+
 
   @media (max-width: 768px) {
     border: none;
-    border-radius: 6px 6px 0 0;
+    border-radius: 8px 8px 0 0;
   }
 `;
 
 const RightContainer = styled("section")`
   width: 100%;
 
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 8px 8px 0;
   border-left: 1px solid grey;
   padding: 1rem;
   background-color: whitesmoke;
 
   @media (max-width: 768px) {
     border: none;
-    border-radius: 0 0 6px 6px;
+    border-radius: 0 0 8px 8px;
   }
 `;
 
