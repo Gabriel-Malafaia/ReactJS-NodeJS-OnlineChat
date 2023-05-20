@@ -18,8 +18,12 @@ const SignInSide = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<ILoginSchema>({ resolver: zodResolver(loginSchema) });
+    formState: { errors, isValid, isDirty },
+  } = useForm<ILoginSchema>({
+    mode: "onChange",
+    delayError: 500,
+    resolver: zodResolver(loginSchema),
+  });
 
   return (
     <BoxContainer>
@@ -64,6 +68,7 @@ const SignInSide = () => {
           type="submit"
           fullWidth
           variant="contained"
+          disabled={!isValid || !isDirty}
           sx={{ mt: 3, mb: 2 }}
         >
           Entrar

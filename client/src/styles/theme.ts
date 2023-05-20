@@ -12,7 +12,7 @@ const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          minHeight: "100vh",
+          // minHeight: "100vh",
         },
       },
     },

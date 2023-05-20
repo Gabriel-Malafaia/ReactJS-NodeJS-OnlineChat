@@ -56,12 +56,10 @@ export const SignContextProvider = ({ children }: IChildrenNodeType) => {
 
     try {
       const response = await Api.post("/login", data);
-      console.log(response);
-      
-      // const { token } = response.data;
+      const { token } = response.data;
       setModalConfig("success", "Bem-vindo(a) ao ChatApp.");
-      // localStorage.setItem("@chatApp:token", token);
-      navigate("/dashboard");
+      localStorage.setItem("@chatApp:token", token);
+      navigate("/profile");
     } catch (err) {
       if (err instanceof AxiosError) {
         const error = err.response?.data;

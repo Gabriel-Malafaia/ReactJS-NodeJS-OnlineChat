@@ -17,8 +17,12 @@ const SignUpSide = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<IRegisterSchema>({ resolver: zodResolver(registerSchema) });
+    formState: { errors, isValid, isDirty },
+  } = useForm<IRegisterSchema>({
+    mode: "onChange",
+    delayError: 500,
+    resolver: zodResolver(registerSchema),
+  });
 
   return (
     <RegisterForm>
@@ -100,6 +104,7 @@ const SignUpSide = () => {
           type="submit"
           fullWidth
           variant="contained"
+          disabled={!isDirty || !isValid}
           sx={{ mt: 3, mb: 2 }}
         >
           Cadastrar-se
