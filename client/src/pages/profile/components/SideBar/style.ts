@@ -7,8 +7,6 @@ const StyledSideBar = styled("div")`
   align-items: center;
 
   color: white;
-  border-right: 1px 1px solid white;
-  /* box-shadow: 2px 2px 5px blue; */
   background-color: #222222;
 
   min-height: 100vh;

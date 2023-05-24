@@ -1,5 +1,6 @@
-import SideBar from "../../components/SideBar";
-import SideContacts from "../../components/SideContacts";
+import { Conversations } from "./components/Conversations";
+import SideBar from "./components/SideBar";
+import SideContacts from "./components/SideContacts";
 import { StyledProfile } from "./style";
 
 const Profile = () => {
@@ -7,6 +8,7 @@ const Profile = () => {
     <StyledProfile>
       <SideBar />
       <SideContacts />
+      <Conversations />
     </StyledProfile>
   );
 };

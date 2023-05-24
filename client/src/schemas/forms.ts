@@ -16,7 +16,7 @@ export const registerSchema = z
       .max(128, "Máximo de 128 Caracteres"),
     cpf: z
       .string()
-      .min(11, "Cpf Obrigatório.")
+      .min(11, "Cpf Inválido.")
       .max(11, "Cpf deve ter 11 dígitos."),
     password: z
       .string()
