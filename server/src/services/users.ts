@@ -8,7 +8,7 @@ async function createUserService(payload: IUserSchemaCreation) {
 }
 
 async function listUserService(id: string) {
-  const user = await User.findOne({ id });
+  const user = await User.findById(id);
   const filteredUser = userSchemaResponse.parse(user);
   return filteredUser;
 }

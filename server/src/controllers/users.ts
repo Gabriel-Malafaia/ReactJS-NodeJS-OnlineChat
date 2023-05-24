@@ -9,7 +9,7 @@ async function createUserController(req: Request, res: Response) {
 }
 
 async function listUserController(req: Request, res: Response) {
-  const id = res.locals.id;
+  const id = res.locals.userId;
   const data = await listUserService(id);
   return res.status(200).json(data);
 }
