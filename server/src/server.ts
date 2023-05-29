@@ -20,7 +20,7 @@ const io = new Server(httpServer, {
     allowedHeaders: ["my-custom-header"],
     credentials: true,
   },
-});
+} as any);
 
 io.on("connection", (socket) => {
   connectionUser(socket);
