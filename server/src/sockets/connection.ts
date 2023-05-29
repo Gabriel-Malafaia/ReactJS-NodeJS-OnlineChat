@@ -9,6 +9,7 @@ function connectionUser(
 ) {
   socket.on("firstConnection", (user) => {
     const newUser = { ...user, socketId: socket.id };
+    
     onlineUsers.add(newUser);
 
     io.emit("userOnline", newUser);

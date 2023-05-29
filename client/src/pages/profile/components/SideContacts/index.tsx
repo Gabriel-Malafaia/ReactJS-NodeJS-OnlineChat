@@ -18,6 +18,8 @@ const SideContacts = () => {
 
   useEffect(() => {
     if (socket) {
+      console.log(socket);
+      
       socket.emit("firstConnection", {
         userId: user.id,
         userName: `${user.name} ${user.lastName}`,

@@ -10,7 +10,7 @@ const Profile = () => {
   const { setSocket } = useProfileContext();
 
   useEffect(() => {
-    const socket = io("http://localhost:3000");
+    const socket = io("http://localhost:3001/");
     setSocket(socket);
   }, []);
 
