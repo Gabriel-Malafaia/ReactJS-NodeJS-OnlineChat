@@ -7,7 +7,7 @@ const onlineUsers = new Set();
 function connectionUser(
   socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>
 ) {
-  socket.on("onlineUser", (user) => {
+  socket.on("firstConnection", (user) => {
     const newUser = { ...user, socketId: socket.id };
     onlineUsers.add(newUser);
 
