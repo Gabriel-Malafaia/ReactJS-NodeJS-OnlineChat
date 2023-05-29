@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import { ISessionSchemaCreation } from "../schemas/sessions";
 import { IUserResponse } from "../interfaces/users";
+import { Request, Response } from "express";
 import { createSessionService } from "../services/sessions";
+import { ISessionSchemaCreation } from "../schemas/sessions";
 
 async function createSessionController(req: Request, res: Response) {
   const payload: ISessionSchemaCreation = req.body;

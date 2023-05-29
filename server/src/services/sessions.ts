@@ -1,7 +1,7 @@
+import { sign } from "jsonwebtoken";
+import { AppError } from "../errors";
 import { compareSync } from "bcryptjs";
 import { ISessionSchemaCreation } from "../schemas/sessions";
-import { AppError } from "../errors";
-import { sign } from "jsonwebtoken";
 
 async function createSessionService(
   payload: ISessionSchemaCreation,

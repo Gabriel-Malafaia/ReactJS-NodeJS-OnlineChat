@@ -1,24 +1,22 @@
+import { io } from "../server";
 import { Socket } from "socket.io";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
-import { io } from "../server";
-import { insertData, removeData } from "./utils";
 
 const onlineUsers = new Set();
 
 function connectionUser(
   socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>
 ) {
-  socket.on("userOnlineInfo", (user) => {
-    socket.emit("onlineUsersList", Array.from(onlineUsers));
-    
-    const { userName: name } = user;
+  socket.on("onlineUser", (user) => {
+    const newUser = { ...user, socketId: socket.id };
+    onlineUsers.add(newUser);
 
-    insertData(onlineUsers, name);
-    io.emit("userOnline", name);
+    io.emit("userOnline", newUser);
+    io.emit("onlineUsersList", Array.from(onlineUsers));
 
     socket.on("disconnect", () => {
-      removeData(onlineUsers, name);
-      io.emit("userOffline", name);
+      onlineUsers.delete(newUser);
+      io.emit("userOffline", newUser);
     });
   });
 }
