@@ -1,5 +1,5 @@
-import { Outlet } from "react-router-dom";
 import Progress from "../../components/Progress";
+import { Outlet } from "react-router-dom";
 import { useProfileContext } from "../../contexts/ProfileContext";
 
 const ProtectedRoute = () => {

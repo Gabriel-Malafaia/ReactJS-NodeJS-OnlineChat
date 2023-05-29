@@ -1,27 +1,39 @@
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import AlertDialog from "../../../../components/AlertDialog";
 import SettingsIcon from "@mui/icons-material/Settings";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { Avatar } from "@mui/material";
+import { useState } from "react";
 import { StyledSideBar } from "./style";
 import { useProfileContext } from "../../../../contexts/ProfileContext";
-import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
   const { user } = useProfileContext();
-  const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
 
-  function handleLogout() {
-    localStorage.clear();
-    navigate("/");
+  function handleOpenModal() {
+    setOpenModal(true);
   }
-  
+
   return (
-    <StyledSideBar>
-      <Avatar sx={{ width: "45px", height: "45px" }}>{user.name[0]}</Avatar>
-      <div>
-        <SettingsIcon />
-        <ExitToAppIcon onClick={handleLogout} />
-      </div>
-    </StyledSideBar>
+    <>
+      <AlertDialog open={openModal} setOpen={setOpenModal} />
+      <StyledSideBar>
+        <Avatar
+          sx={{
+            width: "45px",
+            height: "45px",
+            background: "#12beb1",
+            color: "white",
+          }}
+        >
+          {user.name[0]}
+        </Avatar>
+        <div>
+          <SettingsIcon />
+          <ExitToAppIcon onClick={handleOpenModal} />
+        </div>
+      </StyledSideBar>
+    </>
   );
 };
 

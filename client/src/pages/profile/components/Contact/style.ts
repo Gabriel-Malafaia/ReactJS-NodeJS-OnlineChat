@@ -1,3 +1,4 @@
+import theme from "../../../../styles/theme";
 import { Badge, styled } from "@mui/material";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -31,17 +32,17 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const StyledContact = styled("li")`
+
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 1rem;
-  list-style: none;
-  border-radius: 6px;
   padding: 1rem;
-  
- &:hover {
-    background-color: #323232;
- }
+  list-style: none;
+
+  &:hover {
+    background-color: ${theme.palette.grey[200]};
+  }
 `;
 
 export { StyledContact, StyledBadge };

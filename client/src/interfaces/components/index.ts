@@ -4,3 +4,8 @@ export interface ICopyrightProps {
   linkColor?: string;
   marginTop?: number;
 }
+
+export interface IAlertDialog {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}

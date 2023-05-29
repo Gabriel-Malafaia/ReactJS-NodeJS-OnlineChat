@@ -6,9 +6,9 @@ export const registerSchema = z
       .string()
       .min(6, "Mínimo de 6 Caracteres.")
       .max(26, "Máximo de 26 Caracteres."),
-    username: z
+    lastName: z
       .string()
-      .min(6, "Mínimo de 6 Caracteres.")
+      .min(3, "Mínimo de 6 Caracteres.")
       .max(15, "Máximo de 15 Caracteres."),
     email: z
       .string()

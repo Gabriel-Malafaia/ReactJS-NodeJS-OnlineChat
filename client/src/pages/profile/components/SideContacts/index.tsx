@@ -1,44 +1,55 @@
 import Contact from "../Contact";
-import { Typography } from "@mui/material";
-import { StyledContacts, StyledSideContacts } from "./style";
+import PersonSearchIcon from "@mui/icons-material/PersonSearch";
+import { toastError } from "../../../../styles/components/Toastify";
+import { IOnlineUsers } from "../../../../interfaces/pages/profile";
 import { useProfileContext } from "../../../../contexts/ProfileContext";
 import { useEffect, useState } from "react";
-import io from "socket.io-client";
+import { OutlinedInput, Typography } from "@mui/material";
+import { StyledContacts, StyledSideContacts } from "./style";
 
 const SideContacts = () => {
-  const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
-  const { user } = useProfileContext();
+  const { user, socket, setSelectedChat } = useProfileContext();
+  const [onlineUsers, setOnlineUsers] = useState<IOnlineUsers[]>([]);
+  const [searchValue, setSearchValue] = useState("");
+
+  function handleChangeInput(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearchValue(e.target.value);
+  }
 
   useEffect(() => {
-    const socket = io("http://localhost:3001", {
-      query: { userId: user.id },
-    });
+    if (socket) {
+      socket.emit("firstConnection", {
+        userId: user.id,
+        userName: `${user.name} ${user.lastName}`,
+      });
 
-    socket.emit("userOnlineInfo", {
-      userId: user.id,
-      userName: user.name,
-    });
+      socket.on("userOnline", (user: IOnlineUsers) => {
+        setOnlineUsers((prevUsers) => [...prevUsers, user]);
+      });
 
-    socket.on("userOnline", (username) => {
-      setOnlineUsers((prevUsers) => [...prevUsers, username]);
-    });
+      socket.on("userOffline", (user: IOnlineUsers) => {
+        setSelectedChat(undefined);
+        toastError(`${user.userName} Desconectou!`);
+        setOnlineUsers((prevUsers) =>
+          prevUsers.filter((u) => u.userId !== user.userId)
+        );
+      });
 
-    socket.on("userOffline", (username) => {
-      setOnlineUsers((prevUsers) =>
-        prevUsers.filter((user) => user !== username)
-      );
-    });
+      socket.on("onlineUsersList", (list: IOnlineUsers[]) => {
+        setOnlineUsers(list);
+      });
 
-    socket.on("onlineUsersList", (users) => {
-      console.log('executou')
-      setOnlineUsers(users);
-    });
+      return () => {
+        socket.disconnect();
+      };
+    }
 
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+    return;
+  }, [socket]);
 
+  const filteredUsers = onlineUsers.filter((user) =>
+    user.userName.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   return (
     <StyledSideContacts>
@@ -46,12 +57,22 @@ const SideContacts = () => {
         <Typography component={"h2"} fontSize="1.5rem">
           Conversas
         </Typography>
-        <input placeholder="Barra de pesquisa" type="search" name="" id="" />
+        <OutlinedInput
+          onChange={handleChangeInput}
+          endAdornment={<PersonSearchIcon />}
+        />
       </header>
       <StyledContacts>
-        {onlineUsers.map((name, index) => { 
-          if (name && name !== user.name) {
-            return <Contact key={name + index} name={name} />;
+        {filteredUsers.map(({ userName: name, userId, socketId }, index) => {
+          if (name && name !== `${user.name} ${user.lastName}`) {
+            return (
+              <Contact
+                key={name + index}
+                name={name}
+                id={userId}
+                socketId={socketId}
+              />
+            );
           }
 
           return null;

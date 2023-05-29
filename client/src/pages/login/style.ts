@@ -4,6 +4,7 @@ const CenteredContainer = styled("section")`
   display: flex;
   justify-content: center;
   flex: 1;
+
   height: 100%;
   padding: 1rem;
   max-width: 1024px;
@@ -36,7 +37,7 @@ const CenteredContainer = styled("section")`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    height: 500px;
+
     width: 100%;
     height: 100%;
     min-height: 100vh;
@@ -52,10 +53,10 @@ const CenteredContainer = styled("section")`
 `;
 
 const LeftContainer = styled("section")`
-  border-radius: 8px 0 0 8px;
-  background-color: #1565c0;
   width: 100%;
 
+  border-radius: 8px 0 0 8px;
+  background-color: #1565c0;
 
   @media (max-width: 768px) {
     border: none;
@@ -65,11 +66,15 @@ const LeftContainer = styled("section")`
 
 const RightContainer = styled("section")`
   width: 100%;
+  padding: 1rem;
 
   border-radius: 0 8px 8px 0;
   border-left: 1px solid grey;
-  padding: 1rem;
   background-color: whitesmoke;
+
+  a {
+    color: inherit;
+  }
 
   @media (max-width: 768px) {
     border: none;

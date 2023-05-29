@@ -3,18 +3,20 @@ import { styled } from "@mui/material";
 const StyledSideContacts = styled("div")`
   display: flex;
   flex-direction: column;
-  color: white;
+
   max-width: 320px;
   width: 100%;
 
   border-left: 1px solid #161616;
-  background-color: #282828;
+  border-right: 1px solid #161616;
+  background-color: whitesmoke;
 
   header {
-    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    padding: 1rem;
     gap: 1rem;
 
     input {
@@ -25,9 +27,10 @@ const StyledSideContacts = styled("div")`
 `;
 
 const StyledContacts = styled("ul")`
-  padding: 0;
   display: flex;
   flex-direction: column;
+
+  padding: 0;
 `;
 
 export { StyledSideContacts, StyledContacts };

@@ -1,5 +1,5 @@
-import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { Typography } from "@mui/material";
 import { ICopyrightProps } from "../../interfaces/components";
 
 const Copyright = ({ name, color, linkColor, marginTop }: ICopyrightProps) => {
@@ -24,4 +24,4 @@ const Copyright = ({ name, color, linkColor, marginTop }: ICopyrightProps) => {
   );
 };
 
-export { Copyright };
+export default Copyright;

@@ -1,17 +1,22 @@
+import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import Copyright from "../Copyright";
 import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { BoxContainer } from "./style";
-import { Link } from "react-router-dom";
-import { Copyright } from "../Copyright";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Box } from "@mui/material";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ILoginSchema, loginSchema } from "../../schemas/forms";
+import { BoxContainer } from "./style";
 import { useSignContext } from "../../contexts/SignContext";
+import { ILoginSchema, loginSchema } from "../../schemas/forms";
+
+export const AvatarStyles = {
+  m: 1,
+  bgColor: "#E7E7E7",
+};
 
 const SignInSide = () => {
   const { loginUserRequest } = useSignContext();
@@ -27,7 +32,7 @@ const SignInSide = () => {
 
   return (
     <BoxContainer>
-      <Avatar sx={{ m: 1, bgcolor: "#E7E7E7" }}>
+      <Avatar sx={AvatarStyles}>
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">

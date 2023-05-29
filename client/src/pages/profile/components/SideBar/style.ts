@@ -1,4 +1,5 @@
 import { styled } from "@mui/material";
+import theme from "../../../../styles/theme";
 
 const StyledSideBar = styled("div")`
   display: flex;
@@ -7,7 +8,7 @@ const StyledSideBar = styled("div")`
   align-items: center;
 
   color: white;
-  background-color: #222222;
+  background-color: ${theme.palette.primary.main};
 
   min-height: 100vh;
   max-width: 60px;
@@ -16,7 +17,7 @@ const StyledSideBar = styled("div")`
 
   svg {
     font-size: 2rem;
-    cursor: pointer;
+    cursor: pointer;  
   }
 
   div {
