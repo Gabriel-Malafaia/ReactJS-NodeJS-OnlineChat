@@ -5,7 +5,9 @@ const BoxContainer = styled(Box)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   width: 100%;
+
   animation: fadeIn;
   animation-duration: 1.5s;
 

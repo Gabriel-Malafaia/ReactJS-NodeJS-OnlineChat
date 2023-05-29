@@ -1,7 +1,7 @@
+import { sign } from "jsonwebtoken";
+import { AppError } from "../errors";
 import { compareSync } from "bcryptjs";
 import { ISessionSchemaCreation } from "../schemas/sessions";
-import { AppError } from "../errors";
-import { sign } from "jsonwebtoken";
 
 async function createSessionService(
   payload: ISessionSchemaCreation,
@@ -16,7 +16,7 @@ async function createSessionService(
   }
 
   const secretKey = process.env.SECRET_KEY || "S3CR3TK3Y";
-  const token = sign({ userId }, secretKey, {
+  const token = sign({ id: userId }, secretKey, {
     expiresIn: "24h",
     subject: email,
   });

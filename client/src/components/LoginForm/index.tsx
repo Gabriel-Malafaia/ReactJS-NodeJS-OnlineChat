@@ -1,25 +1,51 @@
+import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import Copyright from "../Copyright";
 import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { BoxContainer } from "./style";
-import { Link } from "react-router-dom";
-import { Copyright } from "../Copyright";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Box } from "@mui/material";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { BoxContainer } from "./style";
+import { useSignContext } from "../../contexts/SignContext";
+import { ILoginSchema, loginSchema } from "../../schemas/forms";
+
+export const AvatarStyles = {
+  m: 1,
+  bgColor: "#E7E7E7",
+};
 
 const SignInSide = () => {
+  const { loginUserRequest } = useSignContext();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isDirty },
+  } = useForm<ILoginSchema>({
+    mode: "onChange",
+    delayError: 500,
+    resolver: zodResolver(loginSchema),
+  });
+
   return (
     <BoxContainer>
-      <Avatar sx={{ m: 1, bgcolor: "#E7E7E7" }}>
+      <Avatar sx={AvatarStyles}>
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
         Use sua Conta do ChatApp
       </Typography>
-      <Box component="form" noValidate sx={{ mt: 1, width: "100%" }}>
+      <Box
+        onSubmit={handleSubmit(loginUserRequest)}
+        component="form"
+        noValidate
+        sx={{ mt: 1, width: "100%" }}
+      >
         <TextField
+          {...register("email")}
           margin="normal"
           fullWidth
           id="email"
@@ -27,8 +53,11 @@ const SignInSide = () => {
           name="email"
           autoComplete="email"
           autoFocus
+          error={!!errors.email}
+          helperText={errors.email?.message}
         />
         <TextField
+          {...register("password")}
           margin="normal"
           required
           fullWidth
@@ -37,11 +66,14 @@ const SignInSide = () => {
           type="password"
           id="password"
           autoComplete="current-password"
+          error={!!errors.password}
+          helperText={errors.password?.message}
         />
         <Button
           type="submit"
           fullWidth
           variant="contained"
+          disabled={!isValid || !isDirty}
           sx={{ mt: 3, mb: 2 }}
         >
           Entrar
@@ -60,6 +92,6 @@ const SignInSide = () => {
       </Box>
     </BoxContainer>
   );
-}
+};
 
-export default SignInSide
+export default SignInSide;

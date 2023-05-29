@@ -1,17 +1,21 @@
-import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { Typography } from "@mui/material";
 import { ICopyrightProps } from "../../interfaces/components";
 
-const Copyright = ({ name }: ICopyrightProps) => {
+const Copyright = ({ name, color, linkColor, marginTop }: ICopyrightProps) => {
   return (
     <Typography
       variant="body2"
       color="text.secondary"
       align="center"
-      sx={{ mt: 5 }}
+      sx={{ mt: marginTop || 5, color: color || "" }}
     >
       {"Made By © "}
-      <Link color="inherit" to="https://www.linkedin.com/in/gabrielmalafaia/">
+      <Link
+        style={{ textDecoration: "none", color: linkColor || "" }}
+        color="inherit"
+        to="https://www.linkedin.com/in/gabrielmalafaia/"
+      >
         <span>{name}</span>
       </Link>{" "}
       {new Date().getFullYear()}
@@ -20,4 +24,4 @@ const Copyright = ({ name }: ICopyrightProps) => {
   );
 };
 
-export { Copyright };
+export default Copyright;

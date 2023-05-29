@@ -1,37 +1,40 @@
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import Copyright from "../../components/Copyright";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import { RegisterDualInput, RegisterForm } from "./style";
-import { Copyright } from "../../components/Copyright";
 import { useForm } from "react-hook-form";
-import { IRegisterSchema, registerSchema } from "../../schemas/forms";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AvatarStyles } from "../../components/LoginForm";
+import { useSignContext } from "../../contexts/SignContext";
+import { IRegisterSchema, registerSchema } from "../../schemas/forms";
+import { RegisterDualInput, RegisterForm } from "./style";
 
 const SignUpSide = () => {
+  const { createUserRequest } = useSignContext();
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<IRegisterSchema>({ resolver: zodResolver(registerSchema) });
-
-  function onSubmitFunc(data: IRegisterSchema) {
-    console.log(data);
-  }
+    formState: { errors, isValid, isDirty },
+  } = useForm<IRegisterSchema>({
+    mode: "onChange",
+    delayError: 500,
+    resolver: zodResolver(registerSchema),
+  });
 
   return (
     <RegisterForm>
-      <Avatar sx={{ m: 1, bgcolor: "#E7E7E7" }}>
+      <Avatar sx={AvatarStyles}>
         <HowToRegIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
         Cadastre sua Conta no ChatApp
       </Typography>
       <Box
-        onSubmit={handleSubmit(onSubmitFunc)}
+        onSubmit={handleSubmit(createUserRequest)}
         component="form"
         noValidate
         sx={{ mt: 1, width: "100%" }}
@@ -46,13 +49,14 @@ const SignUpSide = () => {
             error={!!errors.name}
             helperText={errors.name?.message}
           />
+
           <TextField
-            {...register("username")}
+            {...register("lastName")}
             margin="normal"
             fullWidth
-            label="Usuário *"
-            error={!!errors.username}
-            helperText={errors.username?.message}
+            label="Sobrenome *"
+            error={!!errors.lastName}
+            helperText={errors.lastName?.message}
           />
         </RegisterDualInput>
 
@@ -68,6 +72,7 @@ const SignUpSide = () => {
 
         <TextField
           {...register("cpf")}
+          type="number"
           margin="normal"
           fullWidth
           label="CPF *"
@@ -101,6 +106,7 @@ const SignUpSide = () => {
           type="submit"
           fullWidth
           variant="contained"
+          disabled={!isDirty || !isValid}
           sx={{ mt: 3, mb: 2 }}
         >
           Cadastrar-se
