@@ -8,16 +8,6 @@ const StyledConversations = styled("section")`
   width: 100%;
   min-height: 100vh;
   background-color: #1565c0;
-
-  div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    max-width: 40%;
-    gap: 0.2rem;
-  }
 `;
 
 const StyledConversationsChat = styled("section")`
@@ -73,6 +63,18 @@ const StyledConversationsChat = styled("section")`
 
     button {
       cursor: pointer;
+    }
+  }
+
+  @media (max-width: 700px) {
+    min-height: calc(100vh);
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* height: 100%; */
+    form {
+      height: 4rem;
     }
   }
 `;

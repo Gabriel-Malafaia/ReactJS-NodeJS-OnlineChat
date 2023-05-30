@@ -1,10 +1,11 @@
 import LogoApp from "../../../../components/Logo";
 import Copyright from "../../../../components/Copyright";
 import { Typography } from "@mui/material";
+import { StyledChatMessage } from "./style";
 
 const ChatMessage = () => {
   return (
-    <div>
+    <StyledChatMessage>
       <LogoApp width="120px" />
       <Typography color="white">ChatApp</Typography>
       <Typography color="white">
@@ -23,7 +24,7 @@ const ChatMessage = () => {
         linkColor="#12beb1"
         marginTop={2}
       />
-    </div>
+    </StyledChatMessage>
   );
 };
 

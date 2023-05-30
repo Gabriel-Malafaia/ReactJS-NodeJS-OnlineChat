@@ -24,6 +24,10 @@ const StyledSideContacts = styled("div")`
       padding: 0.4rem;
     }
   }
+
+  @media (max-width: 700px) {
+   max-width: unset;
+  }
 `;
 
 const StyledContacts = styled("ul")`

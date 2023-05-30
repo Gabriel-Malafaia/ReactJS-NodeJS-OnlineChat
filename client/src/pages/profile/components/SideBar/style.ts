@@ -27,6 +27,22 @@ const StyledSideBar = styled("div")`
     align-items: center;
     gap: 1rem;
   }
+
+  @media (max-width: 700px) {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    max-width: unset;
+    min-height: unset;
+    padding: 1rem;
+
+
+    div {
+      display: flex;
+      flex-direction: unset;
+    }
+
+  }
 `;
 
 export { StyledSideBar };
